@@ -7,6 +7,10 @@ if(CONFIG_COMPONENT_MICROPYTHON_ENABLE)
     set(mpy_build_dir "${CMAKE_BINARY_DIR}/micropython")
     set(mpy_build_gen_header_dir "${mpy_build_dir}/genhdr")
 
+    #############Saad_Custom
+    set(OpenCV_DIR "/usr/local/lib/cmake/opencv4")
+    find_package(OpenCV REQUIRED)
+
     if(IS_DIRECTORY ${CONFIG_BUILTIN_PY_DIR})
         set(mpy_frozen_py_dir ${CONFIG_BUILTIN_PY_DIR})
     else()
@@ -41,6 +45,7 @@ if(CONFIG_COMPONENT_MICROPYTHON_ENABLE)
                             "${mpy_port_dir}/src/omv/py/include"
                             "${mpy_port_dir}/src/standard_lib/include"
                             "${mpy_build_dir}"
+                            "${OpenCV_INCLUDE_DIRS}"   ##Saad_Custom
         )
     list(APPEND ADD_PRIVATE_INCLUDE "${mpy_port_dir}/src/nes/mapper")
     ###############################################
@@ -81,6 +86,10 @@ if(CONFIG_COMPONENT_MICROPYTHON_ENABLE)
     append_srcs_dir(MPY_PORT_SRCS "port/src/standard_lib/socket")
     append_srcs_dir(MPY_PORT_SRCS "port/src/standard_lib/uos")
     append_srcs_dir(MPY_PORT_SRCS "port/src/standard_lib/utime")
+    append_srcs_dir(MPY_PORT_SRCS "port/src/my_lib")
+    append_srcs_dir(MPY_PORT_SRCS "port/src/aruco")
+
+
 
     list(APPEND MPY_SRCS    
                     "core/py/mpstate.c"
@@ -531,6 +540,8 @@ if(CONFIG_COMPONENT_MICROPYTHON_ENABLE)
     add_definitions(-DFFCONF_H=\"${mpy_core_dir}/lib/oofatfs/ffconf.h\"
                     -DNOT_GEN_MPY_CROSS=1
                     )
+
+
 
     register_component()
 

@@ -376,6 +376,10 @@ extern const struct _mp_obj_module_t mp_module_touchscreen;
 
 #define  MAIXPY_PY_MODULES                   (1)
 #define  MAIXPY_PY_MODULES_ULTRASONIC        (1)
+#define MODULE_MY_LIB_ENABLED (1)
+#define MODULE_ARUCO_ENABLED (1)
+
+
 
 // micropython-ulab
 #if CONFIG_MICROPYTHON_ULAB_ENALBE
